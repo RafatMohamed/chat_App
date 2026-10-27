@@ -28,7 +28,7 @@ android {
         applicationId = "com.example.scholar_chat_proj"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23 // ← updated
+        minSdk = flutter.minSdkVersion // ← updated
         multiDexEnabled = true
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

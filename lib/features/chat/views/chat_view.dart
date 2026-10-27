@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:scholar_chat_proj/core/widgets/loading_indicator.dart';
 import 'package:scholar_chat_proj/features/chat/model/chat_service.dart';
 import 'package:scholar_chat_proj/features/chat/views/widgets/buillder_view.dart';
-import '../../../core/helper/notify_app.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../data/chat_model.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({super.key, required this.email});
+
   final String email;
 
   @override
@@ -15,7 +17,6 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   final ChatService chatService = ChatService();
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _ChatViewState extends State<ChatView> {
           return const Text('Something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return NotifyApp.circularProgress();
+          return const LoadingIndicator();
         }
         List<ChatModel> chatList = [];
         for (int i = 0; i < snapshot.data!.docs.length; i++) {
@@ -45,7 +46,13 @@ class _ChatViewState extends State<ChatView> {
             });
           }
         });
-        return BuilderView(border: border,chatList: chatList,email: widget.email,username: username, chatService: chatService,);
+        return BuilderView(
+          border: border,
+          chatList: chatList,
+          email: widget.email,
+          username: username,
+          chatService: chatService,
+        );
       },
     );
   }

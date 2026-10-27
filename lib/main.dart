@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:scholar_chat_proj/core/constants/app_constant.dart';
 
-import 'features/login/views/login_view.dart';
+import 'core/resources/app_them.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,16 +17,14 @@ void main() async {
 
 class ChatApp extends StatelessWidget {
   const ChatApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: AppConstant.appName,
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: AppConstant.primaryColor),
-        textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),
-        scaffoldBackgroundColor: AppConstant.primaryColor,
-      ),
-      home: const LoginView(),
+      theme: AppThem.darkThem(),
+      home: const Placeholder(),
     );
   }
 }
