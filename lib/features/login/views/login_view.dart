@@ -5,8 +5,8 @@
 // import 'package:scholar_chat_proj/core/constants/app_constant.dart';
 // import 'package:scholar_chat_proj/core/helper/navigator_app.dart';
 // import 'package:scholar_chat_proj/features/chat/views/chat_view.dart';
-// import 'package:scholar_chat_proj/features/forget_password/model/forgetPassword_cubit.dart';
-// import 'package:scholar_chat_proj/features/forget_password/model/forgetPassword_state.dart';
+// import 'package:scholar_chat_proj/features/forget_password/model/forget_password_cubit.dart';
+// import 'package:scholar_chat_proj/features/forget_password/model/forget_password_state.dart';
 // import 'package:scholar_chat_proj/features/forget_password/model/forgetpassword_cubit.dart';
 // import 'package:scholar_chat_proj/features/login/logic/login_cubit.dart';
 // import 'package:scholar_chat_proj/features/login/logic/login_state.dart';

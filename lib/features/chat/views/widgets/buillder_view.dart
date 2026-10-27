@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scholar_chat_proj/core/resources/app_texts.dart';
+import 'package:scholar_chat_proj/core/resources/assets_manager.dart';
 
-import '../../../../core/constants/app_constant.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/chat_bubble_widget.dart';
 import '../../data/chat_model.dart';
@@ -58,7 +59,7 @@ class _BuilderViewState extends State<BuilderView> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: Text(
-                        "Hi ${widget.username}",
+                        AppTexts.hi(widget.username),
                         style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.bold,
@@ -71,9 +72,9 @@ class _BuilderViewState extends State<BuilderView> {
                       alignment: AlignmentDirectional.center,
                       child: Row(
                         children: [
-                          Image.asset(AppConstant.kLogo, width: 50, height: 50),
+                          Image.asset(ImageAssets.logo, width: 50, height: 50),
                           const Text(
-                            AppConstant.appName,
+                            AppTexts.appName,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -141,7 +142,7 @@ class _BuilderViewState extends State<BuilderView> {
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(8),
                           border: InputBorder.none,
-                          hintText: "Type a message",
+                          hintText: AppTexts.typeMessage,
                         ),
                       ),
                     ),

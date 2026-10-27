@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:scholar_chat_proj/core/resources/app_texts.dart';
 import 'package:scholar_chat_proj/core/widgets/loading_indicator.dart';
 import 'package:scholar_chat_proj/features/chat/model/chat_service.dart';
 import 'package:scholar_chat_proj/features/chat/views/widgets/buillder_view.dart';
@@ -26,7 +27,7 @@ class _ChatViewState extends State<ChatView> {
       stream: chatService.stream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('Something went wrong');
+          return const Text(AppTexts.somethingWentWrongGeneric);
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingIndicator();

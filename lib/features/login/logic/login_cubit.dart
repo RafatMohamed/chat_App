@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_chat_proj/core/resources/app_texts.dart';
 
 import '../data/model.dart';
 import 'login_state.dart';
@@ -42,38 +43,29 @@ class LoginCubit extends Cubit<LoginState> {
       log(e.message ?? 'FirebaseAuth error');
       switch (e.code) {
         case 'user-not-found':
-          emit(LoginError(error: "No user found for that email."));
+          emit(LoginError(error: AppTexts.userNotFound));
           break;
         case 'wrong-password':
-          emit(LoginError(error: "Incorrect password."));
+          emit(LoginError(error: AppTexts.wrongPassword));
           break;
         case 'invalid-credential':
-          emit(
-            LoginError(
-              error: "Invalid email or password. Please check and try again.",
-            ),
-          );
+          emit(LoginError(error: AppTexts.invalidCredential));
           break;
         case 'invalid-email':
-          emit(LoginError(error: "The email address is badly formatted."));
+          emit(LoginError(error: AppTexts.invalidEmailAddress));
           break;
         case 'user-disabled':
-          emit(LoginError(error: "This user account has been disabled."));
+          emit(LoginError(error: AppTexts.userDisabled));
           break;
         case 'too-many-requests':
-          emit(LoginError(error: "Too many login attempts. Try again later."));
+          emit(LoginError(error: AppTexts.tooManyRequests));
           break;
         default:
-          emit(
-            LoginError(
-              error:
-                  e.message ?? "Authentication failed. Please try again later.",
-            ),
-          );
+          emit(LoginError(error: e.message ?? AppTexts.authFailed));
       }
     } catch (e) {
       log('General error: $e');
-      emit(LoginError(error: "Oops, something went wrong: ${e.toString()}"));
+      emit(LoginError(error: AppTexts.oopsSomethingWentWrong(e.toString())));
     }
   }
 

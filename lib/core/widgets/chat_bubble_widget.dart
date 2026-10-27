@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scholar_chat_proj/core/resources/app_texts.dart';
 import 'package:scholar_chat_proj/features/chat/data/chat_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -55,7 +56,7 @@ class ChatBubble extends StatelessWidget {
                         textSend.timestamp!.toDate(),
                         locale: 'en_short',
                       )
-                      : "just now",
+                      : AppTexts.justNow,
                   style: const TextStyle(fontSize: 10, color: Colors.grey),
                 ),
               ],

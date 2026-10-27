@@ -7,7 +7,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String label;
   final void Function()? onTap;
   final TextStyle? textStyle;
-  final ButtonStyle? style;
+  final ButtonStyle? buttonStyle;
 
   const CustomElevatedButton({
     super.key,
@@ -16,7 +16,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.suffixIcon,
     required this.label,
     this.onTap,
-    this.style,
+    this.buttonStyle,
   });
 
   @override
@@ -24,7 +24,7 @@ class CustomElevatedButton extends StatelessWidget {
     final buttonThem = Theme.of(context).elevatedButtonTheme.style;
     return ElevatedButton(
       onPressed: onTap,
-      style: style ?? buttonThem,
+      style: buttonStyle ?? buttonThem,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

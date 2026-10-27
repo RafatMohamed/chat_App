@@ -2,8 +2,8 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
 //
 // import '../../../core/constants/app_constant.dart';
-// import '../model/forgetPassword_cubit.dart';
-// import '../model/forgetPassword_state.dart';
+// import '../model/forget_password_cubit.dart';
+// import '../model/forget_password_state.dart';
 //
 // class ForgetPasswordView extends StatelessWidget {
 //   const ForgetPasswordView({super.key, required this.emailAuth});

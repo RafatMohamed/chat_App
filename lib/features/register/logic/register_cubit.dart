@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_chat_proj/core/resources/app_texts.dart';
 import 'package:scholar_chat_proj/features/register/data/model.dart';
 import 'package:scholar_chat_proj/features/register/logic/register_state.dart';
 
@@ -31,41 +32,30 @@ class RegisterCubit extends Cubit<RegisterState> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        emit(RegisterError(error: "The password provided is too weak."));
+        emit(RegisterError(error: AppTexts.weakPassword));
         log('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        emit(
-          RegisterError(error: "The account already exists for that email."),
-        );
+        emit(RegisterError(error: AppTexts.emailAlreadyInUse));
         log('The account already exists for that email.');
       } else if (e.code == 'invalid-email') {
-        emit(RegisterError(error: "The email address is badly formatted."));
+        emit(RegisterError(error: AppTexts.invalidEmailAddress));
         log('The email address is badly formatted.');
       } else if (e.code == 'operation-not-allowed') {
-        emit(
-          RegisterError(
-            error:
-                "Email/password accounts are not enabled. Please check your Firebase authentication settings.",
-          ),
-        );
+        emit(RegisterError(error: AppTexts.operationNotAllowed));
         log('Email/password accounts are not enabled.');
       } else {
-        emit(
-          RegisterError(
-            error: "An unknown error occurred. Please try again later.",
-          ),
-        );
+        emit(RegisterError(error: AppTexts.unknownError));
         log('Firebase Auth error: ${e.message}');
       }
     } on SocketException catch (e) {
-      emit(
-        RegisterError(
-          error: "No internet connection. Please check your network settings.",
-        ),
-      );
+      emit(RegisterError(error: AppTexts.noInternetConnection));
       log('Network error: $e');
     } catch (e) {
-      emit(RegisterError(error: "Oops! Something went wrong: ${e.toString()}"));
+      emit(
+        RegisterError(
+          error: AppTexts.oopsExclamationSomethingWentWrong(e.toString()),
+        ),
+      );
       log('General error: $e');
     }
   }

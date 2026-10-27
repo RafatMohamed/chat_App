@@ -5,11 +5,13 @@ import 'color_manager.dart';
 
 const String _fontFamily = "Pacifico";
 
+String get fontFamily => _fontFamily;
+
 class AppThem {
   static ThemeData darkThem() => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    fontFamily: _fontFamily,
+    // fontFamily: _fontFamily,
     scaffoldBackgroundColor: AppColors.background,
     primaryColor: AppColors.primary,
     colorScheme: const ColorScheme.dark(
@@ -56,11 +58,14 @@ class AppThem {
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.textPrimary,
-        minimumSize: const Size(double.infinity, 52),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      style: ButtonStyle(
+        animationDuration: const Duration(milliseconds: 200),
+        backgroundColor: WidgetStateProperty.all(AppColors.primary),
+        foregroundColor: WidgetStateProperty.all(AppColors.textPrimary),
+        minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 52)),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
       ),
     ),
   );

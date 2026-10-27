@@ -8,6 +8,7 @@ import '../resources/values_manager.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
+    super.key,
     this.controller,
     this.focusNode,
     this.nextFocus,
@@ -22,7 +23,7 @@ class CustomTextField extends StatefulWidget {
     this.cursorColor,
     this.readOnly = false,
     this.validation,
-    this.onTap,
+    this.onChange,
     this.maxLines,
     this.prefixIcon,
     this.borderBackgroundColor,
@@ -47,7 +48,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? Function(String?)? validation;
-  final void Function()? onTap;
+  final void Function(String? lable)? onChange;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -55,7 +56,6 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   late bool hidden = widget.isObscured;
-  String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -72,80 +72,65 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ),
             )
             : const SizedBox(),
-        Container(
-          margin: const EdgeInsets.only(top: Insets.s5),
-          decoration: BoxDecoration(
-            color:
-                widget.backgroundColor ??
-                AppColors.background.withValues(alpha: .15),
-            borderRadius: BorderRadius.circular(Sizes.s8),
-            border: Border.all(
-              color: widget.borderBackgroundColor ?? AppColors.border,
+        TextFormField(
+          maxLines: widget.maxLines ?? 1,
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          readOnly: widget.readOnly,
+          style: textThem.titleLarge,
+          obscureText: hidden,
+          keyboardType: widget.textInputType,
+          obscuringCharacter: '*',
+          cursorColor: widget.cursorColor ?? AppColors.primary,
+          onChanged: widget.onChange,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          onEditingComplete: () {
+            widget.focusNode?.unfocus();
+            if (widget.nextFocus != null) {
+              FocusScope.of(context).requestFocus(widget.nextFocus);
+            }
+          },
+          textInputAction:
+              widget.nextFocus == null
+                  ? TextInputAction.done
+                  : TextInputAction.next,
+          validator: widget.validation,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(Insets.s12),
+            hintText: widget.hint,
+            prefixIcon: widget.prefixIcon,
+            suffixIcon:
+                widget.isObscured
+                    ? IconButton(
+                      onPressed: () => setState(() => hidden = !hidden),
+                      iconSize: Sizes.s24,
+                      splashRadius: Sizes.s1,
+                      isSelected: !hidden,
+                      color: widget.cursorColor,
+                      selectedIcon: const Icon(
+                        Icons.visibility,
+                        color: AppColors.textSecondary,
+                        size: Sizes.s24,
+                      ),
+                      icon: SvgPicture.asset(
+                        SvgAssets.visibilityOff,
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.textSecondary,
+                          BlendMode.dst,
+                        ),
+                        height: Sizes.s24,
+                      ),
+                    )
+                    : widget.suffixIcon,
+            hintStyle: widget.hintTextStyle,
+            border: InputBorder.none,
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: AppColors.error, width: 2),
             ),
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: TextFormField(
-            maxLines: widget.maxLines ?? 1,
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            readOnly: widget.readOnly,
-            style: textThem.titleLarge,
-            obscureText: hidden,
-            keyboardType: widget.textInputType,
-            obscuringCharacter: '*',
-            cursorColor: widget.cursorColor ?? AppColors.primary,
-            onTap: widget.onTap,
-            onEditingComplete: () {
-              widget.focusNode?.unfocus();
-              if (widget.nextFocus != null) {
-                FocusScope.of(context).requestFocus(widget.nextFocus);
-              }
-            },
-            textInputAction:
-                widget.nextFocus == null
-                    ? TextInputAction.done
-                    : TextInputAction.next,
-            validator: (value) {
-              if (widget.validation == null) {
-                setState(() => errorText = null);
-              } else {
-                setState(() => errorText = widget.validation!(value));
-              }
-              return errorText;
-            },
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(Insets.s12),
-              hintText: widget.hint,
-              prefixIcon: widget.prefixIcon,
-              suffixIcon:
-                  widget.isObscured
-                      ? IconButton(
-                        onPressed: () => setState(() => hidden = !hidden),
-                        iconSize: Sizes.s24,
-                        splashRadius: Sizes.s1,
-                        isSelected: !hidden,
-                        color: widget.cursorColor,
-                        selectedIcon: const Icon(Icons.visibility),
-                        icon: SvgPicture.asset(SvgAssets.visibilityOff),
-                      )
-                      : widget.suffixIcon,
-              hintStyle: widget.hintTextStyle,
-              border: InputBorder.none,
-            ),
+            errorStyle: AppTextStyles.error.copyWith(fontSize: 14),
           ),
         ),
-        errorText == null
-            ? const SizedBox()
-            : Padding(
-              padding: const EdgeInsetsDirectional.only(
-                top: Insets.s8,
-                start: Insets.s8,
-              ),
-              child: Text(
-                errorText!,
-                style: AppTextStyles.error.copyWith(fontSize: 16),
-              ),
-            ),
       ],
     );
   }
