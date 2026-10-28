@@ -48,7 +48,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? Function(String?)? validation;
-  final void Function(String? lable)? onChange;
+  final void Function(String? label)? onChange;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();

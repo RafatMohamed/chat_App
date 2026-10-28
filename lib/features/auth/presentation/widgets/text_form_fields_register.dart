@@ -37,6 +37,7 @@ class TextFormFieldsRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: Insets.s18,
       children: [
         SlideUpAnimation(
           child: CustomTextField(

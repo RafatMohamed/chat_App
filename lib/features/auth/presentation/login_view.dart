@@ -95,6 +95,10 @@ class _LoginViewState extends State<LoginView> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       log("login Success");
+                      Navigator.pushReplacementNamed(
+                        context,
+                        Routes.mainAppView,
+                      );
                     }
                   },
                 ),

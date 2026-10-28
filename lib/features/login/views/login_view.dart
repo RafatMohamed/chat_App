@@ -4,7 +4,7 @@
 // import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:scholar_chat_proj/core/constants/app_constant.dart';
 // import 'package:scholar_chat_proj/core/helper/navigator_app.dart';
-// import 'package:scholar_chat_proj/features/chat/views/chat_view.dart';
+// import 'package:scholar_chat_proj/features/chat/views/search_view_body.dart';
 // import 'package:scholar_chat_proj/features/forget_password/model/forget_password_cubit.dart';
 // import 'package:scholar_chat_proj/features/forget_password/model/forget_password_state.dart';
 // import 'package:scholar_chat_proj/features/forget_password/model/forgetpassword_cubit.dart';

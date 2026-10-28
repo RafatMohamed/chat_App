@@ -25,6 +25,7 @@ class TextFormFieldsLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: Insets.s18,
       children: [
         SlideUpAnimation(
           child: CustomTextField(
@@ -45,7 +46,7 @@ class TextFormFieldsLogin extends StatelessWidget {
           ),
         ),
         SlideUpAnimation(
-          delay: const Duration(seconds: 1),
+          delay: const Duration(milliseconds: 500),
           child: CustomTextField(
             label: AppTexts.password,
             focusNode: passwordFocus,

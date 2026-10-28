@@ -3,6 +3,7 @@ class AppTexts {
 
   // Common & App
   static const String appName = 'Chat App';
+  static const String recentChat = "Recent Chats";
   static const String somethingWentWrong = 'Something went wrong!';
   static const String somethingWentWrongGeneric = 'Something went wrong';
 
@@ -20,9 +21,21 @@ class AppTexts {
   static const String createAccount = 'Create Account';
   static const String registerSubtitle =
       'Create an account and start chatting.';
+  static const String noChatYet = 'No chats yet';
+  static const String findPeople = 'Find People';
+  static const String myProfile = 'My Profile';
+  static const String inviteContact = 'Invite Contacts';
+  static const String findYourPeople = 'Find Your People';
+  static const String noChatDesc = "Search for someone to start aconversation.";
+  static const String noSearchDesc =
+      "Search for someone to start a private conversation.";
+  static const String cantFindPeople = "Can't find who you're looking for?";
+  static const String inviteQr = "Invite via link or QR code";
 
   // Authentication - Form Fields & Labels
   static const String emailAddress = 'Email Address';
+  static const String fullName = 'full name';
+  static const String phoneNumber = "Phone Number";
   static const String enterYourEmail = 'Enter your email';
   static const String password = 'Password';
   static const String enterYourPassword = 'Enter your password';
@@ -33,8 +46,11 @@ class AppTexts {
 
   // Authentication - Actions & Navigation
   static const String forgotPassword = 'Forgot Password?';
+  static const String searchAbout = 'Search people by name or email';
   static const String resetPassword = 'Reset Password?';
   static const String logIn = 'Log In';
+  static const String logOut = 'Log Out';
+  static const String editeProfile = 'Edit Profile';
   static const String dontHaveAccount = "Don't have an account? ";
   static const String alreadyHaveAccount = 'Already have an account? ';
 
@@ -56,6 +72,7 @@ class AppTexts {
   static String sentVerification(String email) =>
       'We sent a verification code to $email. Please enter it below:';
   static const String typeMessage = 'Type a message';
+  static const String message = 'Message';
 
   // Password Reset Feedback & Errors
   static String passwordResetLinkSent(String email) =>
@@ -67,6 +84,7 @@ class AppTexts {
   // Authentication Feedback & Errors
   static const String userNotFound = 'No user found for that email.';
   static const String wrongPassword = 'Incorrect password.';
+  static const String peopleFound = 'people found';
   static const String invalidCredential =
       'Invalid email or password. Please check and try again.';
   static const String invalidEmailAddress =
@@ -91,4 +109,8 @@ class AppTexts {
 
   static String oopsExclamationSomethingWentWrong(String error) =>
       'Oops! Something went wrong: $error';
+
+  static const String chat = 'Chats';
+  static const String search = 'Search';
+  static const String profile = 'Profile';
 }

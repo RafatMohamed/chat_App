@@ -99,6 +99,10 @@ class _RegisterViewState extends State<RegisterView> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       log("Register Success");
+                      Navigator.pushReplacementNamed(
+                        context,
+                        Routes.mainAppView,
+                      );
                     }
                   },
                 ),

@@ -12,7 +12,7 @@
 // import '../../../core/widget/custom_logo_text.dart';
 // import '../../../core/widget/default_material_button.dart';
 // import '../../../core/widget/default_text_butt.dart';
-// import '../../chat/views/chat_view.dart';
+// import '../../chat/views/search_view_body.dart';
 // import '../../login/views/login_view.dart';
 //
 // class RegisterView extends StatelessWidget {

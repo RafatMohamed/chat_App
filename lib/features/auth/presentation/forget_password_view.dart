@@ -106,6 +106,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       log("Reset Password Success");
+                      Navigator.pop(context);
                     }
                   },
                 ),
