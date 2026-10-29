@@ -22,7 +22,7 @@ class ChatApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppTexts.appName,
       theme: AppThem.darkThem(),
-      initialRoute: Routes.onBoarding,
+      initialRoute: Routes.chatView,
       routes: RouteGenerator.routes,
     );
   }

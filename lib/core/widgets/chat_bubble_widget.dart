@@ -1,70 +1,114 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:scholar_chat_proj/core/resources/app_text_styles.dart';
 import 'package:scholar_chat_proj/core/resources/app_texts.dart';
-import 'package:scholar_chat_proj/features/chat/data/chat_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../resources/color_manager.dart';
 
-class ChatBubble extends StatelessWidget {
-  const ChatBubble({
-    super.key,
-    required this.border,
-    required this.textSend,
-    this.isMe = true,
-    this.color = AppColors.primary,
-    this.alignmentDirectional = AlignmentDirectional.centerEnd,
-  });
+class CustomMessageBubble extends StatelessWidget {
+  const CustomMessageBubble({super.key, required this.message});
 
-  final Radius border;
-  final ChatModel textSend;
-  final bool isMe;
-  final Color color;
-  final AlignmentGeometry alignmentDirectional;
+  final ChatMessageModel message;
 
   @override
   Widget build(BuildContext context) {
-    final sizeWidth = MediaQuery.sizeOf(context).width;
-    return Column(
-      children: [
-        Align(
-          alignment:
-              isMe ? alignmentDirectional : AlignmentDirectional.centerStart,
-          child: Container(
-            constraints: BoxConstraints(maxWidth: sizeWidth * 0.6),
-            padding: const EdgeInsetsDirectional.all(16),
-            decoration: BoxDecoration(
-              color: isMe ? color : const Color(0xff006D84),
-              borderRadius: BorderRadiusDirectional.only(
-                topEnd: border,
-                topStart: border,
-                bottomEnd: isMe ? Radius.zero : border,
-                bottomStart: isMe ? border : Radius.zero,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment:
+            message.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment:
+                message.isMe ? Alignment.centerRight : Alignment.centerLeft,
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.sizeOf(context).width * 0.72,
+              ),
+              padding: const EdgeInsets.fromLTRB(15, 13, 15, 10),
+              decoration: BoxDecoration(
+                color:
+                    message.isMe
+                        ? AppColors.sentMessage
+                        : AppColors.receivedMessage,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(16),
+                  topRight: const Radius.circular(16),
+                  bottomLeft: Radius.circular(message.isMe ? 16 : 4),
+                  bottomRight: Radius.circular(message.isMe ? 4 : 16),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(message.text, style: AppTextStyles.message),
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (message.isMe) ...[
+                        Text(
+                          message.time != null
+                              ? timeago.format(
+                                message.time.toDate(),
+                                locale: 'en_short',
+                              )
+                              : AppTexts.justNow,
+                          style: AppTextStyles.messageTime.copyWith(
+                            color: const Color(0xFFD0D2EB),
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Icon(
+                          message.isPending
+                              ? Icons.access_time
+                              : message.isRead
+                              ? Icons.done_all
+                              : Icons.done,
+                          size: 13,
+                          color:
+                              message.isRead
+                                  ? AppColors.online
+                                  : AppColors.pending,
+                        ),
+                      ],
+                    ],
+                  ),
+                ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  textSend.message,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  textSend.timestamp != null
-                      ? timeago.format(
-                        textSend.timestamp!.toDate(),
-                        locale: 'en_short',
-                      )
-                      : AppTexts.justNow,
-                  style: const TextStyle(fontSize: 10, color: Colors.grey),
-                ),
-              ],
-            ),
           ),
-        ),
-        const SizedBox(height: 10),
-      ],
+          if (!message.isMe) ...[
+            const SizedBox(height: 6),
+            Text(
+              message.time != null
+                  ? timeago.format(message.time.toDate(), locale: 'en_short')
+                  : AppTexts.justNow,
+              style: AppTextStyles.messageTime,
+            ),
+          ],
+        ],
+      ),
     );
   }
+}
+
+class ChatMessageModel {
+  const ChatMessageModel({
+    required this.text,
+    required this.time,
+    required this.isMe,
+    this.isRead = false,
+    this.isPending = false,
+  });
+
+  final String text;
+  final Timestamp time;
+  final bool isMe;
+  final bool isRead;
+  final bool isPending;
 }

@@ -49,23 +49,26 @@ class _ProfileViewState extends State<ProfileView> {
             horizontal: Insets.s16,
           ),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const CustomAppBarProfile(),
-                const SizedBox(height: Sizes.s28),
-                InfoUserProfile(),
-                const SizedBox(height: Sizes.s1),
-                TextFormFieldsProfiles(
-                  emailController: _emailController,
-                  nameController: _nameController,
-                  phoneController: _phoneController,
-                  nameFocus: _nameFocus,
-                  emailFocus: _emailFocus,
-                  phoneFocus: _phoneFocus,
-                ),
-                const SizedBox(height: Sizes.s24),
-                ButtonProfileControl(),
-              ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const CustomAppBarProfile(),
+                  const SizedBox(height: Sizes.s28),
+                  const InfoUserProfile(),
+                  const SizedBox(height: Sizes.s1),
+                  TextFormFieldsProfiles(
+                    emailController: _emailController,
+                    nameController: _nameController,
+                    phoneController: _phoneController,
+                    nameFocus: _nameFocus,
+                    emailFocus: _emailFocus,
+                    phoneFocus: _phoneFocus,
+                  ),
+                  const SizedBox(height: Sizes.s24),
+                  const ButtonProfileControl(),
+                ],
+              ),
             ),
           ),
         ),

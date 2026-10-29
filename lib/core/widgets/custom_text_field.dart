@@ -28,6 +28,8 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.borderBackgroundColor,
     this.suffixIcon,
+    this.onFieldSubmitted,
+    this.isNewLine = false,
   });
 
   final TextEditingController? controller;
@@ -49,6 +51,8 @@ class CustomTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validation;
   final void Function(String? label)? onChange;
+  final void Function(String? label)? onFieldSubmitted;
+  final bool? isNewLine;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -73,6 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             )
             : const SizedBox(),
         TextFormField(
+          onFieldSubmitted: widget.onFieldSubmitted,
           maxLines: widget.maxLines ?? 1,
           controller: widget.controller,
           focusNode: widget.focusNode,
@@ -91,7 +96,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             }
           },
           textInputAction:
-              widget.nextFocus == null
+              widget.isNewLine!
+                  ? TextInputAction.newline
+                  : widget.nextFocus == null
                   ? TextInputAction.done
                   : TextInputAction.next,
           validator: widget.validation,

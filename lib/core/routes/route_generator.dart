@@ -7,6 +7,7 @@ import 'package:scholar_chat_proj/features/boarding/UI/on_boarding_view.dart';
 import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
 
 import '../../features/MainHomeAppView/view/main_app_view.dart';
+import '../../features/chat/views/chat_view.dart';
 import '../../features/profile/presentation/profile_view.dart';
 import '../../features/search/presentation/search_view.dart';
 
@@ -21,5 +22,6 @@ class RouteGenerator {
         Routes.homeView: (context) => const HomeView(),
         Routes.searchView: (context) => const SearchView(),
         Routes.profileView: (context) => const ProfileView(),
+        Routes.chatView: (context) => const ChatView(),
       };
 }

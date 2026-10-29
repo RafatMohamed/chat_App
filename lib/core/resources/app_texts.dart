@@ -22,11 +22,14 @@ class AppTexts {
   static const String registerSubtitle =
       'Create an account and start chatting.';
   static const String noChatYet = 'No chats yet';
+  static const String noMessageYet = 'No Messages yet';
   static const String findPeople = 'Find People';
   static const String myProfile = 'My Profile';
   static const String inviteContact = 'Invite Contacts';
   static const String findYourPeople = 'Find Your People';
   static const String noChatDesc = "Search for someone to start aconversation.";
+  static const String noMessagesDesc = "Say hello and start a conversation.";
+  static const String sayHello = "Say Hello!";
   static const String noSearchDesc =
       "Search for someone to start a private conversation.";
   static const String cantFindPeople = "Can't find who you're looking for?";
@@ -71,7 +74,7 @@ class AppTexts {
 
   static String sentVerification(String email) =>
       'We sent a verification code to $email. Please enter it below:';
-  static const String typeMessage = 'Type a message';
+  static const String typeMessage = 'Type a message...';
   static const String message = 'Message';
 
   // Password Reset Feedback & Errors

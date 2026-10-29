@@ -14,12 +14,12 @@ class CustomAppBarProfile extends StatelessWidget {
       children: [
         const Text(AppTexts.myProfile, style: AppTextStyles.headingSmall),
         Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.border),
             borderRadius: BorderRadiusGeometry.circular(16),
           ),
-          child: Text("ACTIVE", style: AppTextStyles.bodySmall),
+          child: const Text("ACTIVE", style: AppTextStyles.bodySmall),
         ),
       ],
     );

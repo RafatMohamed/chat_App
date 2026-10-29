@@ -18,15 +18,15 @@ class ButtonProfileControl extends StatelessWidget {
           label: AppTexts.editeProfile,
           textStyle: AppTextStyles.button.copyWith(color: AppColors.accent),
           buttonStyle: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(AppColors.surface),
+            backgroundColor: const WidgetStatePropertyAll(AppColors.surface),
             shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(16),
-                side: BorderSide(color: AppColors.border, width: 1.5),
+                side: const BorderSide(color: AppColors.border, width: 1.5),
               ),
             ),
           ),
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.mode_edit_outline_outlined,
             color: AppColors.accent,
           ),
@@ -39,15 +39,15 @@ class ButtonProfileControl extends StatelessWidget {
           },
           textStyle: AppTextStyles.button.copyWith(color: AppColors.error),
           buttonStyle: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(AppColors.surface),
+            backgroundColor: const WidgetStatePropertyAll(AppColors.surface),
             shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(16),
-                side: BorderSide(color: AppColors.error, width: 1.5),
+                side: const BorderSide(color: AppColors.error, width: 1.5),
               ),
             ),
           ),
-          prefixIcon: Icon(Icons.login_outlined, color: AppColors.error),
+          prefixIcon: const Icon(Icons.login_outlined, color: AppColors.error),
         ),
       ],
     );

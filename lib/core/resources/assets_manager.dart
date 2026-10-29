@@ -14,4 +14,5 @@ class SvgAssets {
   static const String emptySearch = '$_svgPath/emptySearch.svg';
   static const String findPeopleIcon = '$_svgPath/findPeopleIcon.svg';
   static const String noMessageYet = '$_svgPath/noMessageYet.svg';
+  static const String helloIcon = '$_svgPath/helloIcon.svg';
 }
