@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scholar_chat_proj/core/get_user_name_first_char.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholar_chat_proj/features/home/presentation/widgets/chat_empty_view.dart';
 import 'package:scholar_chat_proj/features/home/presentation/widgets/chat_view.dart';
 import 'package:scholar_chat_proj/features/home/presentation/widgets/cutom_app_bar_home.dart';
@@ -7,12 +7,14 @@ import 'package:scholar_chat_proj/features/home/presentation/widgets/cutom_app_b
 import '../../../core/resources/app_text_styles.dart';
 import '../../../core/resources/app_texts.dart';
 import '../../../core/resources/values_manager.dart';
+import '../../MainHomeAppView/presentation/cubit/getUsersCubit/get_users_cubit.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final usersDefault = context.watch<GetUsersCubit>().users;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -31,14 +33,13 @@ class HomeView extends StatelessWidget {
                     AppTexts.recentChat,
                     style: AppTextStyles.titleMedium,
                   ),
-                  Text("(${users.length})", style: AppTextStyles.hint),
+                  Text("(${usersDefault.length})", style: AppTextStyles.hint),
                 ],
               ),
               Expanded(
-                child:
-                    users.isNotEmpty
-                        ? ChatsView(users: users)
-                        : const ChatEmptyView(),
+                child: usersDefault.isNotEmpty
+                    ? ChatsView(users: usersDefault)
+                    : const ChatEmptyView(),
               ),
             ],
           ),
@@ -47,69 +48,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
-class UserModel {
-  final String id;
-  final String name;
-  final String bio;
-  final bool? isOnline;
-  final String charName;
-
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.bio,
-    this.isOnline,
-  }) : charName = getUserChar(name);
-}
-
-List<UserModel> users = [
-  UserModel(
-    id: "1",
-    name: "Raafat Mohamed",
-    bio: "Flutter Dev",
-    isOnline: true,
-  ),
-  UserModel(id: "2", name: "Khalid Ahmed", bio: "Backend Dev", isOnline: false),
-  UserModel(id: "3", name: "Ahmed Mohamed", bio: "Sales", isOnline: true),
-  UserModel(
-    id: "1",
-    name: "Raafat Mohamed",
-    bio: "Flutter Dev",
-    isOnline: true,
-  ),
-  UserModel(id: "2", name: "Khalid Ahmed", bio: "Backend Dev", isOnline: false),
-  UserModel(id: "3", name: "Ahmed Mohamed", bio: "Sales", isOnline: true),
-  UserModel(
-    id: "1",
-    name: "Raafat Mohamed",
-    bio: "Flutter Dev",
-    isOnline: true,
-  ),
-  UserModel(id: "2", name: "Khalid Ahmed", bio: "Backend Dev", isOnline: false),
-  UserModel(id: "3", name: "Ahmed Mohamed", bio: "Sales", isOnline: true),
-  UserModel(
-    id: "1",
-    name: "Raafat Mohamed",
-    bio: "Flutter Dev",
-    isOnline: true,
-  ),
-  UserModel(id: "2", name: "Khalid Ahmed", bio: "Backend Dev", isOnline: false),
-  UserModel(id: "3", name: "Ahmed Mohamed", bio: "Sales", isOnline: true),
-  UserModel(
-    id: "1",
-    name: "Raafat Mohamed",
-    bio: "Flutter Dev",
-    isOnline: true,
-  ),
-  UserModel(id: "2", name: "Khalid Ahmed", bio: "Backend Dev", isOnline: false),
-  UserModel(id: "3", name: "Ahmed Mohamed", bio: "Sales", isOnline: true),
-  UserModel(
-    id: "1",
-    name: "Raafat Mohamed",
-    bio: "Flutter Dev",
-    isOnline: true,
-  ),
-  UserModel(id: "2", name: "Khalid Ahmed", bio: "Backend Dev", isOnline: false),
-  UserModel(id: "3", name: "Ahmed Mohamed", bio: "Sales", isOnline: true),
-];

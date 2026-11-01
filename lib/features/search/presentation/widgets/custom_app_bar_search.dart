@@ -7,17 +7,20 @@ import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 
 class CustomAppBarSearch extends StatelessWidget {
-  const CustomAppBarSearch({super.key});
+  const CustomAppBarSearch({super.key, required this.onChange});
+
+  final ValueChanged<String?> onChange;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppTexts.findPeople, style: AppTextStyles.headingSmall),
-        SizedBox(height: Sizes.s20),
+        const Text(AppTexts.findPeople, style: AppTextStyles.headingSmall),
+        const SizedBox(height: Sizes.s20),
         CustomSearchText(
-          suffixIcon: Icon(
+          onChange: onChange,
+          suffixIcon: const Icon(
             Icons.clear_outlined,
             color: AppColors.accent,
             size: 24,

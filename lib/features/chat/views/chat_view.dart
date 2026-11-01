@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholar_chat_proj/core/widgets/chat_bubble_widget.dart';
 import 'package:scholar_chat_proj/features/chat/views/widgets/custom_app_bar_messages.dart';
 import 'package:scholar_chat_proj/features/chat/views/widgets/message_empty_view.dart';
@@ -7,7 +8,7 @@ import 'package:scholar_chat_proj/features/chat/views/widgets/messages_view.dart
 
 import '../../../core/resources/color_manager.dart';
 import '../../../core/resources/values_manager.dart';
-import '../../home/presentation/home_view.dart';
+import '../../MainHomeAppView/presentation/cubit/getUsersCubit/get_users_cubit.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({super.key});
@@ -99,16 +100,15 @@ class _ChatViewState extends State<ChatView> {
                     end: Alignment.bottomCenter,
                   ),
                 ),
-                child:
-                    users.isNotEmpty
-                        ? MessagesView(
-                          focusNode: focusNode,
-                          messages: _messages,
-                          messageController: messageController,
-                          scrollController: scrollController,
-                          onSendMessage: onSendMessage,
-                        )
-                        : const MessagesEmptyView(),
+                child: context.watch<GetUsersCubit>().users.isNotEmpty
+                    ? MessagesView(
+                        focusNode: focusNode,
+                        messages: _messages,
+                        messageController: messageController,
+                        scrollController: scrollController,
+                        onSendMessage: onSendMessage,
+                      )
+                    : const MessagesEmptyView(),
               ),
             ),
           ],

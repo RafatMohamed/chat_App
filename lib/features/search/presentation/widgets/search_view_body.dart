@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
+import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
 
 import '../../../../../core/resources/app_text_styles.dart';
 import '../../../../../core/resources/app_texts.dart';
@@ -13,7 +13,7 @@ import 'custom_search_item.dart';
 class SearchViewBody extends StatelessWidget {
   const SearchViewBody({super.key, required this.users});
 
-  final List<UserModel> users;
+  final List<UserEntity> users;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SearchViewBody extends StatelessWidget {
               final item = users[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: Insets.s14),
-                child: CustomSearchItem(item: item),
+                child: CustomSearchItem(user: item),
               );
             },
           ),

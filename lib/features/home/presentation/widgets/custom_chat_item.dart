@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:scholar_chat_proj/core/get_user_name_first_char.dart';
+import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
 
 import '../../../../core/resources/app_text_styles.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
-import '../home_view.dart';
 
 class CustomChatItem extends StatelessWidget {
   const CustomChatItem({super.key, required this.item});
 
-  final UserModel item;
+  final UserEntity item;
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +33,19 @@ class CustomChatItem extends StatelessWidget {
                     alignment: AlignmentDirectional.center,
                     height: 50,
                     width: 50,
-                    child: Text(item.charName, style: AppTextStyles.userName),
+                    child: Text(
+                      getUserChar(item.username),
+                      style: AppTextStyles.userName,
+                    ),
                   ),
                   if (item.isOnline != null && item.isOnline == true)
                     CircleAvatar(
                       backgroundColor: AppColors.background,
                       radius: 10,
                       child: CircleAvatar(
-                        backgroundColor:
-                            item.isOnline! ? AppColors.online : null,
+                        backgroundColor: item.isOnline!
+                            ? AppColors.online
+                            : null,
                         radius: 8,
                       ),
                     ),
@@ -51,7 +56,7 @@ class CustomChatItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(item.name, style: AppTextStyles.titleMedium),
+                    Text(item.username, style: AppTextStyles.titleMedium),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(
                         start: Insets.s8,

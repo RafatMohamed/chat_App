@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:scholar_chat_proj/core/get_user_name_first_char.dart';
 import 'package:scholar_chat_proj/core/routes/routes.dart';
+import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
 
 import '../../../../../core/resources/app_text_styles.dart';
 import '../../../../../core/resources/app_texts.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
-import '../../../home/presentation/home_view.dart';
 
 class CustomSearchItem extends StatelessWidget {
-  const CustomSearchItem({super.key, required this.item});
+  const CustomSearchItem({super.key, required this.user});
 
-  final UserModel item;
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +37,19 @@ class CustomSearchItem extends StatelessWidget {
                     alignment: AlignmentDirectional.center,
                     height: 50,
                     width: 50,
-                    child: Text(item.charName, style: AppTextStyles.userName),
+                    child: Text(
+                      getUserChar(user.username),
+                      style: AppTextStyles.userName,
+                    ),
                   ),
-                  if (item.isOnline != null && item.isOnline == true)
+                  if (user.isOnline != null && user.isOnline == true)
                     CircleAvatar(
                       backgroundColor: AppColors.background,
                       radius: 10,
                       child: CircleAvatar(
-                        backgroundColor:
-                            item.isOnline! ? AppColors.online : null,
+                        backgroundColor: user.isOnline!
+                            ? AppColors.online
+                            : null,
                         radius: 8,
                       ),
                     ),
@@ -56,7 +61,7 @@ class CustomSearchItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      item.name,
+                      user.username,
                       style: AppTextStyles.titleMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -66,7 +71,7 @@ class CustomSearchItem extends StatelessWidget {
                         start: Insets.s8,
                       ),
                       child: Text(
-                        item.bio,
+                        user.bio ?? "",
                         style: AppTextStyles.bodyLarge.copyWith(
                           color: AppColors.textSecondary,
                           fontSize: 14,

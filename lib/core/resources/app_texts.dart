@@ -52,6 +52,13 @@ class AppTexts {
   static const String searchAbout = 'Search people by name or email';
   static const String resetPassword = 'Reset Password?';
   static const String logIn = 'Log In';
+  static const String logInSuccess = 'Log In Success';
+  static const String createAccountSuccess = 'Create Account Success';
+  static const String sendResetPasswordSuccess = 'Send Reset Password Success';
+  static const String logOutSuccess = 'Log Out Success';
+  static const String editProfileSuccess = 'Edit Profile Success';
+  static const String deleteAccountSuccess = 'Delete Account Success';
+
   static const String logOut = 'Log Out';
   static const String editeProfile = 'Edit Profile';
   static const String dontHaveAccount = "Don't have an account? ";

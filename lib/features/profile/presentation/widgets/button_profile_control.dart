@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/app_text_styles.dart';
 import '../../../../core/resources/app_texts.dart';
@@ -6,9 +7,12 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
+import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class ButtonProfileControl extends StatelessWidget {
-  const ButtonProfileControl({super.key});
+  const ButtonProfileControl({super.key, required this.onEditeProfile});
+
+  final Function() onEditeProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +34,13 @@ class ButtonProfileControl extends StatelessWidget {
             Icons.mode_edit_outline_outlined,
             color: AppColors.accent,
           ),
+          onTap: onEditeProfile,
         ),
         const SizedBox(height: Sizes.s10),
         CustomElevatedButton(
           label: AppTexts.logOut,
           onTap: () {
+            context.read<AuthCubit>().logout();
             Navigator.pushReplacementNamed(context, Routes.login);
           },
           textStyle: AppTextStyles.button.copyWith(color: AppColors.error),

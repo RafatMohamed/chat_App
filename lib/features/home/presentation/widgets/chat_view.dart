@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
+import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
 
 import '../../../../core/resources/values_manager.dart';
 import 'custom_chat_item.dart';
@@ -7,7 +7,7 @@ import 'custom_chat_item.dart';
 class ChatsView extends StatelessWidget {
   const ChatsView({super.key, required this.users});
 
-  final List<UserModel> users;
+  final List<UserEntity> users;
 
   @override
   Widget build(BuildContext context) {

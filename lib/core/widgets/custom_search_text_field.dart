@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
 
 import '../resources/app_text_styles.dart';
 import '../resources/app_texts.dart';
@@ -9,9 +8,10 @@ import '../resources/color_manager.dart';
 import 'custom_text_field.dart';
 
 class CustomSearchText extends StatefulWidget {
-  const CustomSearchText({super.key, this.suffixIcon});
+  const CustomSearchText({super.key, this.suffixIcon, this.onChange});
 
   final Widget? suffixIcon;
+  final ValueChanged<String?>? onChange;
 
   @override
   State<CustomSearchText> createState() => _CustomSearchTextState();
@@ -20,22 +20,12 @@ class CustomSearchText extends StatefulWidget {
 class _CustomSearchTextState extends State<CustomSearchText> {
   late final TextEditingController searchController;
   late final FocusNode focusNode;
-  late final List<UserModel> allUser;
 
   @override
   void initState() {
     searchController = TextEditingController();
     focusNode = FocusNode();
-    allUser = List<UserModel>.from(users);
     super.initState();
-  }
-
-  void onChange(String label) {
-    users =
-        allUser.where((element) {
-          return element.name.toLowerCase().contains(label.toLowerCase());
-        }).toList();
-    setState(() {});
   }
 
   @override
@@ -44,24 +34,27 @@ class _CustomSearchTextState extends State<CustomSearchText> {
       controller: searchController,
       textInputType: TextInputType.emailAddress,
       onChange: (label) {
-        onChange(label ?? "");
-        setState(() {});
+        label = label?.trim();
+        if (label == null || label.isEmpty) {
+          widget.onChange?.call("");
+          return;
+        }
+        widget.onChange?.call(label);
+        label = searchController.text;
       },
-      suffixIcon:
-          widget.suffixIcon == null
-              ? null
-              : SizedBox(
-                width: 48,
-                height: 48,
-                child: IconButton(
-                  onPressed: () {
-                    searchController.clear();
-                    onChange("");
-                    setState(() {});
-                  },
-                  icon: widget.suffixIcon!,
-                ),
+      suffixIcon: widget.suffixIcon == null
+          ? null
+          : SizedBox(
+              width: 48,
+              height: 48,
+              child: IconButton(
+                onPressed: () {
+                  searchController.clear();
+                  widget.onChange?.call("");
+                },
+                icon: widget.suffixIcon!,
               ),
+            ),
       focusNode: focusNode,
       prefixIcon: SvgPicture.asset(
         SvgAssets.search,
