@@ -1,4 +1,4 @@
-import 'package:scholar_chat_proj/features/auth/domain/repo/user_repo.dart';
+import 'package:scholar_chat_proj/features/MainHomeAppView/domain/repo/user_repo.dart';
 
 class DeleteUserUseCase {
   final UserRepo _userRepo;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scholar_chat_proj/core/get_user_name_first_char.dart';
 
-import '../../../../core/resources/app_text_styles.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/values_manager.dart';
+import '../../../../../core/resources/app_text_styles.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 
 class CustomAppBarMessages extends StatelessWidget {
   const CustomAppBarMessages({

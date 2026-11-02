@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:scholar_chat_proj/core/routes/routes.dart';
 import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
 
 import '../../../../../core/resources/app_text_styles.dart';
@@ -27,7 +28,16 @@ class SearchViewBody extends StatelessWidget {
               final item = users[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: Insets.s14),
-                child: CustomSearchItem(user: item),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.chatView,
+                      arguments: item,
+                    );
+                  },
+                  child: CustomSearchItem(user: item),
+                ),
               );
             },
           ),

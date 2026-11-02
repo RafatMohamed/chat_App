@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:scholar_chat_proj/core/get_user_name_first_char.dart';
-import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
+import 'package:scholar_chat_proj/features/chat/domain/entities/chat_item_entity.dart';
 
 import '../../../../core/resources/app_text_styles.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 
-class CustomChatItem extends StatelessWidget {
-  const CustomChatItem({super.key, required this.item});
+class CustomChatHomeItem extends StatelessWidget {
+  const CustomChatHomeItem({super.key, required this.chats});
 
-  final UserEntity item;
+  final ChatItemEntity chats;
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +35,17 @@ class CustomChatItem extends StatelessWidget {
                     height: 50,
                     width: 50,
                     child: Text(
-                      getUserChar(item.username),
+                      getUserChar(chats.otherUser.username),
                       style: AppTextStyles.userName,
                     ),
                   ),
-                  if (item.isOnline != null && item.isOnline == true)
+                  if (chats.otherUser.isOnline != null &&
+                      chats.otherUser.isOnline == true)
                     CircleAvatar(
                       backgroundColor: AppColors.background,
                       radius: 10,
                       child: CircleAvatar(
-                        backgroundColor: item.isOnline!
+                        backgroundColor: chats.otherUser.isOnline!
                             ? AppColors.online
                             : null,
                         radius: 8,
@@ -56,13 +58,16 @@ class CustomChatItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(item.username, style: AppTextStyles.titleMedium),
+                    Text(
+                      chats.otherUser.username,
+                      style: AppTextStyles.titleMedium,
+                    ),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(
                         start: Insets.s8,
                       ),
                       child: Text(
-                        "Hello, Raafat How are you Hello, Raafat How are you Hello, Raafat How are you Hello, Raafat How are you Hello, Raafat How are you ",
+                        chats.chat.lastMessage,
                         style: AppTextStyles.bodyLarge.copyWith(
                           color: AppColors.textSecondary,
                           fontSize: 14,
@@ -84,7 +89,7 @@ class CustomChatItem extends StatelessWidget {
           spacing: Insets.s16,
           children: [
             Text(
-              "10:42 AM",
+              DateFormat('hh:mm a').format(chats.chat.lastMessageAt),
               style: AppTextStyles.error.copyWith(
                 color: AppColors.textSecondary,
               ),
@@ -93,7 +98,7 @@ class CustomChatItem extends StatelessWidget {
               backgroundColor: AppColors.primary,
               radius: 12,
               child: Text(
-                "2",
+                "1",
                 style: AppTextStyles.messageTime.copyWith(
                   color: AppColors.textPrimary,
                 ),

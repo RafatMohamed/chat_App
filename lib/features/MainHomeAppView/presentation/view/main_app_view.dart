@@ -5,7 +5,6 @@ import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
 
 import '../../../../core/Di/serves_locator.dart';
 import '../../../profile/presentation/profile_view.dart';
-import '../../../search/presentation/cubit/search_cubit.dart';
 import '../../../search/presentation/search_view.dart';
 import '../cubit/getUsersCubit/get_users_cubit.dart';
 import '../widgets/default_bottom_nav_bar.dart';
@@ -29,7 +28,6 @@ class _MainAppViewState extends State<MainAppView> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getIt<SearchCubit>()),
         BlocProvider(create: (context) => getIt<GetUsersCubit>()..getUsers()),
       ],
       child: Scaffold(

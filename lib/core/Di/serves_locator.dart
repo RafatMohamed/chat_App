@@ -1,7 +1,12 @@
 import 'package:get_it/get_it.dart';
+import 'package:scholar_chat_proj/features/MainHomeAppView/data/repo/user_repo_impl.dart';
+import 'package:scholar_chat_proj/features/MainHomeAppView/domain/repo/user_repo.dart';
+import 'package:scholar_chat_proj/features/chat/data/datasources/remot_data_source/chat_remote_data_source.dart';
+import 'package:scholar_chat_proj/features/chat/data/repo/chat_repo_impl.dart';
+import 'package:scholar_chat_proj/features/chat/domain/usecases/get_chat_stream_use_case.dart';
+import 'package:scholar_chat_proj/features/chat/domain/usecases/send_message_chat_use_case.dart';
 
 import '../../features/MainHomeAppView/data/datasources/remot_data_source/user_remote_data_source.dart';
-import '../../features/MainHomeAppView/data/repo/user_repo_impl.dart';
 import '../../features/MainHomeAppView/domain/usecases/delete_user_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/get_user_id_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/get_user_stream_use_case.dart';
@@ -15,13 +20,17 @@ import '../../features/MainHomeAppView/presentation/cubit/updateCurrentUsercubit
 import '../../features/auth/data/datasources/remot_data_source/auth_remote_data_source.dart';
 import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/auth/domain/repo/auth_repo.dart';
-import '../../features/auth/domain/repo/user_repo.dart';
 import '../../features/auth/domain/usecases/create_user_use_case.dart';
 import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/logout_use_case.dart';
 import '../../features/auth/domain/usecases/register_use_case.dart';
 import '../../features/auth/domain/usecases/reset_password_use_case.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/chat/domain/repo/chat_repo.dart';
+import '../../features/chat/domain/usecases/get_messages_stream_use_case.dart';
+import '../../features/chat/presentation/cubit/chatCubit/chat_cubit.dart';
+import '../../features/chat/presentation/cubit/getMessageCubit/get_message_cubit.dart';
+import '../../features/chat/presentation/cubit/sendMessageCubit/send_message_cubit.dart';
 import '../../features/search/presentation/cubit/search_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -30,11 +39,13 @@ void setupLocator() {
   getIt.registerLazySingleton<UserRemoteDataSource>(
     () => UserRemoteDataSource(),
   );
-
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSource(
       userRemoteDataSource: getIt<UserRemoteDataSource>(),
     ),
+  );
+  getIt.registerLazySingleton<ChatRemoteDataSource>(
+    () => ChatRemoteDataSource(),
   );
 
   getIt.registerLazySingleton<AuthRepo>(
@@ -42,6 +53,9 @@ void setupLocator() {
   );
   getIt.registerLazySingleton<UserRepo>(
     () => UserRepoImpl(userRemoteDataSource: getIt()),
+  );
+  getIt.registerLazySingleton<ChatRepo>(
+    () => ChatRepoImpl(chatRemoteDataSource: getIt()),
   );
 
   getIt.registerLazySingleton(() => RegisterUseCase(authRepo: getIt()));
@@ -56,6 +70,11 @@ void setupLocator() {
   getIt.registerLazySingleton(() => DeleteUserUseCase(userRepo: getIt()));
   getIt.registerLazySingleton(() => GetUsersUseCase(userRepo: getIt()));
   getIt.registerLazySingleton(() => GetUsersFilterUseCase(userRepo: getIt()));
+  getIt.registerLazySingleton(() => GetChatStreamUseCase(chatRepo: getIt()));
+  getIt.registerLazySingleton(() => SendMessageChatUseCase(chatRepo: getIt()));
+  getIt.registerLazySingleton(
+    () => GetMessagesStreamUseCase(chatRepo: getIt()),
+  );
 
   getIt.registerFactory(
     () => AuthCubit(
@@ -81,5 +100,24 @@ void setupLocator() {
 
   getIt.registerFactory(
     () => UpdateUserCubit(updateUserUseCase: getIt(), userIDUseCase: getIt()),
+  );
+
+  getIt.registerFactory(
+    () => ChatCubit(
+      getChatStreamUseCase: getIt(),
+      userIDUseCase: getIt(),
+      getUserUseCase: getIt(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => SendMessageCubit(sendMessageUseCase: getIt(), userIDUseCase: getIt()),
+  );
+
+  getIt.registerFactory(
+    () => GetMessagesCubit(
+      getMessagesStreamUseCase: getIt(),
+      getUserIdUseCase: getIt(),
+    ),
   );
 }

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:dart_either/dart_either.dart';
 import 'package:scholar_chat_proj/core/mapper/app_mappers.dart';
+import 'package:scholar_chat_proj/features/MainHomeAppView/domain/repo/user_repo.dart';
 import 'package:scholar_chat_proj/features/auth/data/models/users_model.dart';
-import 'package:scholar_chat_proj/features/auth/domain/repo/user_repo.dart';
 
 import '../../../auth/domain/entities/user_entities.dart';
 import '../datasources/remot_data_source/user_remote_data_source.dart';

@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_chat_proj/core/resources/app_text_styles.dart';
 import 'package:scholar_chat_proj/core/resources/app_texts.dart';
 import 'package:scholar_chat_proj/core/resources/color_manager.dart';
-import 'package:scholar_chat_proj/core/widgets/chat_bubble_widget.dart';
 import 'package:scholar_chat_proj/core/widgets/custom_text_field.dart';
+import 'package:scholar_chat_proj/core/widgets/loading_indicator.dart';
+import 'package:scholar_chat_proj/features/chat/presentation/cubit/getMessageCubit/get_message_cubit.dart';
+import 'package:scholar_chat_proj/features/chat/presentation/views/widgets/message_empty_view.dart';
 
-import '../../../../core/resources/values_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
+import '../../cubit/getMessageCubit/get_message_state.dart';
 import 'custom_messages_item.dart';
 
 class MessagesView extends StatelessWidget {
   const MessagesView({
     super.key,
-    required this.messages,
     required this.scrollController,
     required this.messageController,
     required this.onSendMessage,
     required this.focusNode,
   });
 
-  final List<ChatMessageModel> messages;
   final ScrollController scrollController;
   final TextEditingController messageController;
   final ValueChanged<String?> onSendMessage;
@@ -28,13 +31,37 @@ class MessagesView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: ListView.builder(
-            itemCount: messages.length,
-            controller: scrollController,
-            padding: const EdgeInsets.symmetric(horizontal: Insets.s16),
-            itemBuilder: (context, index) {
-              final message = messages[index];
-              return CustomMessagesItem(message: message);
+          child: BlocBuilder<GetMessagesCubit, GetMessagesState>(
+            builder: (context, state) {
+              if (state is MessagesLoading) {
+                return const LoadingIndicator();
+              }
+              if (state is MessagesFailure) {
+                return Center(
+                  child: Text(
+                    state.message,
+                    style: AppTextStyles.displayLarge.copyWith(
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                );
+              }
+              if (state is MessagesLoaded) {
+                return state.messages.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: state.messages.length,
+                        controller: scrollController,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Insets.s16,
+                        ),
+                        itemBuilder: (context, index) {
+                          final messageResult = state.messages[index];
+                          return CustomMessagesItem(message: messageResult);
+                        },
+                      )
+                    : const MessagesEmptyView();
+              }
+              return const SizedBox.shrink();
             },
           ),
         ),

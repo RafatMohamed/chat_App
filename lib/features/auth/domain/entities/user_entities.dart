@@ -1,4 +1,5 @@
 class UserEntity {
+  final String? uid;
   final String username;
   final String email;
   final String phoneNumber;
@@ -7,6 +8,7 @@ class UserEntity {
   final DateTime? lastSeen;
 
   const UserEntity({
+    this.uid,
     required this.username,
     required this.email,
     required this.phoneNumber,

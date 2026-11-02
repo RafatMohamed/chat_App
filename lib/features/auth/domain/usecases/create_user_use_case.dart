@@ -1,5 +1,5 @@
 import 'package:dart_either/dart_either.dart';
-import 'package:scholar_chat_proj/features/auth/domain/repo/user_repo.dart';
+import 'package:scholar_chat_proj/features/MainHomeAppView/domain/repo/user_repo.dart';
 
 import '../entities/user_entities.dart';
 

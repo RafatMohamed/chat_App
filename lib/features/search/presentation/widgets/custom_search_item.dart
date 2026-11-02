@@ -89,11 +89,7 @@ class CustomSearchItem extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              Routes.chatView,
-              // arguments: "RaafatMohamed@gmail.com",
-            );
+            Navigator.pushNamed(context, Routes.chatView, arguments: user);
           },
           child: Container(
             decoration: BoxDecoration(

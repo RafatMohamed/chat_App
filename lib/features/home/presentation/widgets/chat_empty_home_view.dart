@@ -8,8 +8,8 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 
-class MessagesEmptyView extends StatelessWidget {
-  const MessagesEmptyView({super.key});
+class ChatEmptyHomeView extends StatelessWidget {
+  const ChatEmptyHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +18,15 @@ class MessagesEmptyView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          SvgAssets.noMessageYet,
+          SvgAssets.emptyChat,
           fit: BoxFit.fill,
-          height: context.height * 0.2,
+          height: context.height * 0.25,
           width: double.infinity,
         ),
-        const SizedBox(height: Insets.s16),
-        const Text(AppTexts.noMessageYet, style: AppTextStyles.headingSmall),
+        const Text(AppTexts.noChatYet, style: AppTextStyles.headingSmall),
         const SizedBox(height: Insets.s8),
         Text(
-          AppTexts.noMessagesDesc,
+          AppTexts.noChatDesc,
           style: AppTextStyles.bodyLarge.copyWith(
             color: AppColors.textSecondary,
           ),
@@ -46,9 +45,16 @@ class MessagesEmptyView extends StatelessWidget {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SvgPicture.asset(SvgAssets.helloIcon, fit: BoxFit.fill),
+              SvgPicture.asset(
+                SvgAssets.findPeopleIcon,
+                fit: BoxFit.fill,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.accent,
+                  BlendMode.srcIn,
+                ),
+              ),
               const Text(
-                AppTexts.sayHello,
+                AppTexts.findPeople,
                 style: AppTextStyles.link,
                 textAlign: TextAlign.center,
               ),

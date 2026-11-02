@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/resources/app_text_styles.dart';
-import '../../../../core/resources/app_texts.dart';
-import '../../../../core/resources/app_them.dart';
-import '../../../../core/resources/assets_manager.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/values_manager.dart';
+import '../../../../../core/resources/app_text_styles.dart';
+import '../../../../../core/resources/app_texts.dart';
+import '../../../../../core/resources/app_them.dart';
+import '../../../../../core/resources/assets_manager.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 
-class ChatEmptyView extends StatelessWidget {
-  const ChatEmptyView({super.key});
+class MessagesEmptyView extends StatelessWidget {
+  const MessagesEmptyView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +18,16 @@ class ChatEmptyView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          SvgAssets.emptyChat,
+          SvgAssets.noMessageYet,
           fit: BoxFit.fill,
-          height: context.height * 0.25,
+          height: context.height * 0.2,
           width: double.infinity,
         ),
-        const Text(AppTexts.noChatYet, style: AppTextStyles.headingSmall),
+        const SizedBox(height: Insets.s16),
+        const Text(AppTexts.noMessageYet, style: AppTextStyles.headingSmall),
         const SizedBox(height: Insets.s8),
         Text(
-          AppTexts.noChatDesc,
+          AppTexts.noMessagesDesc,
           style: AppTextStyles.bodyLarge.copyWith(
             color: AppColors.textSecondary,
           ),
@@ -45,16 +46,9 @@ class ChatEmptyView extends StatelessWidget {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SvgPicture.asset(
-                SvgAssets.findPeopleIcon,
-                fit: BoxFit.fill,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.accent,
-                  BlendMode.srcIn,
-                ),
-              ),
+              SvgPicture.asset(SvgAssets.helloIcon, fit: BoxFit.fill),
               const Text(
-                AppTexts.findPeople,
+                AppTexts.sayHello,
                 style: AppTextStyles.link,
                 textAlign: TextAlign.center,
               ),
