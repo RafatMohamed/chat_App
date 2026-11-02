@@ -24,7 +24,7 @@ class UserRepoImpl implements UserRepo {
         username: user.username,
         email: user.email,
         createdAt: DateTime.now(),
-        isOnline: user.isOnline,
+        isOnline: true,
         lastSeen: user.lastSeen,
         phoneNumber: user.phoneNumber,
       );
@@ -52,15 +52,15 @@ class UserRepoImpl implements UserRepo {
         );
   }
 
-  @override
-  Future<Either<String, UserEntity>> getUser(String uid) async {
-    try {
-      final result = await _userRemoteDataSource.getUser(uid);
-      return Right(AppMappers.toUserEntity(result));
-    } catch (e) {
-      return Left(e.toString());
-    }
-  }
+  // @override
+  // Future<Either<String, UserEntity>> getUser(String uid) async {
+  //   try {
+  //     final result = await _userRemoteDataSource.getUser(uid);
+  //     return Right(AppMappers.toUserEntity(result));
+  //   } catch (e) {
+  //     return Left(e.toString());
+  //   }
+  // }
 
   @override
   Future<Either<String, UserEntity>> updateUser({
@@ -73,7 +73,7 @@ class UserRepoImpl implements UserRepo {
         username: user.username,
         email: user.email,
         createdAt: DateTime.now(),
-        isOnline: user.isOnline,
+        isOnline: true,
         lastSeen: user.lastSeen,
         phoneNumber: user.phoneNumber,
       );
@@ -115,5 +115,10 @@ class UserRepoImpl implements UserRepo {
     } catch (e) {
       return Left(e.toString());
     }
+  }
+
+  @override
+  Future<void> updateLastSeen(String uid) async {
+    await _userRemoteDataSource.updateLastSeen(uid);
   }
 }

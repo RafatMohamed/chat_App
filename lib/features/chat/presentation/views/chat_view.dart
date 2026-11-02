@@ -66,7 +66,10 @@ class _ChatViewState extends State<ChatView> {
         child: Column(
           children: [
             const SizedBox(height: Insets.s16),
-            CustomAppBarMessages(name: widget.userEntity.username),
+            CustomAppBarMessages(
+              name: widget.userEntity.username,
+              isOnline: widget.userEntity.isOnline,
+            ),
             const SizedBox(height: Sizes.s16),
             Expanded(
               child: Container(

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:scholar_chat_proj/core/service/user_presence_service.dart';
 import 'package:scholar_chat_proj/features/MainHomeAppView/data/repo/user_repo_impl.dart';
 import 'package:scholar_chat_proj/features/MainHomeAppView/domain/repo/user_repo.dart';
 import 'package:scholar_chat_proj/features/chat/data/datasources/remot_data_source/chat_remote_data_source.dart';
@@ -10,7 +11,6 @@ import '../../features/MainHomeAppView/data/datasources/remot_data_source/user_r
 import '../../features/MainHomeAppView/domain/usecases/delete_user_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/get_user_id_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/get_user_stream_use_case.dart';
-import '../../features/MainHomeAppView/domain/usecases/get_user_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/get_users_filterd_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/get_users_use_case.dart';
 import '../../features/MainHomeAppView/domain/usecases/update_user_use_case.dart';
@@ -48,6 +48,10 @@ void setupLocator() {
     () => ChatRemoteDataSource(),
   );
 
+  getIt.registerLazySingleton<UserPresenceService>(
+    () => UserPresenceService(userRemoteDataSource: getIt()),
+  );
+
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(authRemoteDataSource: getIt()),
   );
@@ -63,7 +67,7 @@ void setupLocator() {
   getIt.registerLazySingleton(() => LogOutUseCase(authRepo: getIt()));
   getIt.registerLazySingleton(() => ResetPasswordUseCase(authRepo: getIt()));
   getIt.registerLazySingleton(() => GetUserIDUseCase(authRepo: getIt()));
-  getIt.registerLazySingleton(() => GetUserUseCase(userRepo: getIt()));
+  // getIt.registerLazySingleton(() => GetUserUseCase(userRepo: getIt()));
   getIt.registerLazySingleton(() => GetUserStreamUseCase(userRepo: getIt()));
   getIt.registerLazySingleton(() => CreateUserUseCase(userRepo: getIt()));
   getIt.registerLazySingleton(() => UpdateUserUseCase(userRepo: getIt()));
@@ -92,7 +96,7 @@ void setupLocator() {
 
   getIt.registerFactory(
     () => GetCurrentUserCubit(
-      getCurrentUserUseCase: getIt(),
+      // getCurrentUserUseCase: getIt(),
       getUserIDUseCase: getIt(),
       getUserStreamUseCase: getIt(),
     ),
@@ -104,9 +108,10 @@ void setupLocator() {
 
   getIt.registerFactory(
     () => ChatCubit(
+      getUserStreamUseCase: getIt(),
       getChatStreamUseCase: getIt(),
       userIDUseCase: getIt(),
-      getUserUseCase: getIt(),
+      // getUserUseCase: getIt(),
     ),
   );
 

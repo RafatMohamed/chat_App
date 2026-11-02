@@ -4,12 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholar_chat_proj/core/resources/app_texts.dart';
 import 'package:scholar_chat_proj/core/routes/route_generator.dart';
 import 'package:scholar_chat_proj/core/routes/routes.dart';
-import 'package:scholar_chat_proj/features/chat/presentation/cubit/chatCubit/chat_cubit.dart';
 
 import 'core/Di/serves_locator.dart';
 import 'core/app_bloc_observer.dart';
 import 'core/resources/app_them.dart';
-import 'features/MainHomeAppView/presentation/cubit/getCurrentUserCubit/get_current_user_cubit.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/chat/presentation/cubit/getMessageCubit/get_message_cubit.dart';
 import 'features/chat/presentation/cubit/sendMessageCubit/send_message_cubit.dart';
@@ -34,14 +32,9 @@ class ChatApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<AuthCubit>()),
-        BlocProvider(
-          create: (context) =>
-              getIt<GetCurrentUserCubit>()..getCurrentUserStream(),
-        ),
-        BlocProvider(create: (context) => getIt<ChatCubit>()..getChatStream()),
+        BlocProvider(create: (context) => getIt<SearchCubit>()),
         BlocProvider(create: (context) => getIt<GetMessagesCubit>()),
         BlocProvider(create: (context) => getIt<SendMessageCubit>()),
-        BlocProvider(create: (context) => getIt<SearchCubit>()),
       ],
       child: const CustomMaterialApp(),
     );

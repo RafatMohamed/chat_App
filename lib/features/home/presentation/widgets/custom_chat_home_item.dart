@@ -39,13 +39,12 @@ class CustomChatHomeItem extends StatelessWidget {
                       style: AppTextStyles.userName,
                     ),
                   ),
-                  if (chats.otherUser.isOnline != null &&
-                      chats.otherUser.isOnline == true)
+                  if (chats.otherUser.isOnline)
                     CircleAvatar(
                       backgroundColor: AppColors.background,
                       radius: 10,
                       child: CircleAvatar(
-                        backgroundColor: chats.otherUser.isOnline!
+                        backgroundColor: chats.otherUser.isOnline
                             ? AppColors.online
                             : null,
                         radius: 8,

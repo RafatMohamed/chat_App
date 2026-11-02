@@ -6,7 +6,7 @@ class UserModel {
   final String email;
   final String phoneNumber;
   final String? bio;
-  final bool? isOnline;
+  final bool isOnline;
   final DateTime? lastSeen;
   final DateTime? createdAt;
 
@@ -16,7 +16,7 @@ class UserModel {
     required this.email,
     required this.phoneNumber,
     this.bio,
-    this.isOnline,
+    required this.isOnline,
     this.lastSeen,
     this.createdAt,
   });

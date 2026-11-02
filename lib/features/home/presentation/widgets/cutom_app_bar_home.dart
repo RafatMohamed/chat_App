@@ -67,7 +67,7 @@ class CustomAppBarHome extends StatelessWidget {
                           style: AppTextStyles.userName,
                         ),
                       ),
-                      if (user.isOnline == true)
+                      if (user.isOnline)
                         const CircleAvatar(
                           backgroundColor: AppColors.background,
                           radius: 7,

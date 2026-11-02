@@ -51,8 +51,10 @@ class MessagesView extends StatelessWidget {
                     ? ListView.builder(
                         itemCount: state.messages.length,
                         controller: scrollController,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Insets.s16,
+                        padding: const EdgeInsets.only(
+                          left: Insets.s16,
+                          right: Insets.s16,
+                          bottom: Insets.s32,
                         ),
                         itemBuilder: (context, index) {
                           final messageResult = state.messages[index];

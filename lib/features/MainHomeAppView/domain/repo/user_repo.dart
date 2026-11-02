@@ -8,7 +8,7 @@ abstract class UserRepo {
     required String uid,
   });
 
-  Future<Either<String, UserEntity>> getUser(String uid);
+  // Future<Either<String, UserEntity>> getUser(String uid);
 
   Stream<Either<String, UserEntity>> getUserStream(String uid);
 
@@ -22,4 +22,6 @@ abstract class UserRepo {
   });
 
   Future<void> deleteUser(String uid);
+
+  Future<void> updateLastSeen(String uid);
 }

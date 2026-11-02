@@ -9,11 +9,11 @@ class CustomAppBarMessages extends StatelessWidget {
   const CustomAppBarMessages({
     super.key,
     required this.name,
-    this.isOnline = true,
+    required this.isOnline,
   });
 
   final String name;
-  final bool? isOnline;
+  final bool isOnline;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +44,17 @@ class CustomAppBarMessages extends StatelessWidget {
               width: 45,
               child: Text(getUserChar(name), style: AppTextStyles.userName),
             ),
-            const CircleAvatar(
-              backgroundColor: AppColors.background,
-              radius: 7,
-              child: CircleAvatar(backgroundColor: AppColors.online, radius: 5),
-            ),
+            if (isOnline)
+              CircleAvatar(
+                backgroundColor: AppColors.background,
+                radius: 7,
+                child: CircleAvatar(
+                  backgroundColor: isOnline
+                      ? AppColors.online
+                      : AppColors.pending,
+                  radius: 5,
+                ),
+              ),
           ],
         ),
         const SizedBox(width: Insets.s16),
@@ -58,8 +64,10 @@ class CustomAppBarMessages extends StatelessWidget {
           children: [
             Text(name, style: AppTextStyles.titleLarge),
             Text(
-              "is Online",
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.online),
+              isOnline ? "is Online" : "is Offline",
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: isOnline ? AppColors.online : AppColors.pending,
+              ),
             ),
           ],
         ),

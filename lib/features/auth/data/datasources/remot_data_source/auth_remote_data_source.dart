@@ -19,9 +19,9 @@ class AuthRemoteDataSource {
       if (userCredential.user == null) {
         throw FirebaseAuthException(code: 'user-not-found');
       }
-      UserModel user = await _userRemoteDataSource.getUser(
-        userCredential.user!.uid,
-      );
+      UserModel user = await _userRemoteDataSource
+          .getUserStream(userCredential.user!.uid)
+          .first;
       await _userRemoteDataSource.updateLastSeen(userCredential.user!.uid);
       await _userRemoteDataSource.updateOnlineStatus(user.uid, true);
       return user;

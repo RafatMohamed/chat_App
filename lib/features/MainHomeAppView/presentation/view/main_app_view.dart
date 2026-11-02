@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholar_chat_proj/core/resources/values_manager.dart';
+import 'package:scholar_chat_proj/core/service/user_presence_service.dart';
 import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
 
 import '../../../../core/Di/serves_locator.dart';
+import '../../../chat/presentation/cubit/chatCubit/chat_cubit.dart';
 import '../../../profile/presentation/profile_view.dart';
 import '../../../search/presentation/search_view.dart';
+import '../cubit/getCurrentUserCubit/get_current_user_cubit.dart';
 import '../cubit/getUsersCubit/get_users_cubit.dart';
 import '../widgets/default_bottom_nav_bar.dart';
 
@@ -25,10 +28,21 @@ class _MainAppViewState extends State<MainAppView> {
   ];
 
   @override
+  void initState() {
+    getIt<UserPresenceService>().start();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<GetUsersCubit>()..getUsers()),
+        BlocProvider(
+          create: (context) =>
+              getIt<GetCurrentUserCubit>()..getCurrentUserStream(),
+        ),
+        BlocProvider(create: (context) => getIt<ChatCubit>()..getChatStream()),
       ],
       child: Scaffold(
         body: Stack(

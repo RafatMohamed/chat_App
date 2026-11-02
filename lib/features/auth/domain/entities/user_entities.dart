@@ -4,7 +4,8 @@ class UserEntity {
   final String email;
   final String phoneNumber;
   final String? bio;
-  final bool? isOnline;
+
+  final bool isOnline;
   final DateTime? lastSeen;
 
   const UserEntity({
@@ -12,8 +13,8 @@ class UserEntity {
     required this.username,
     required this.email,
     required this.phoneNumber,
+    required this.isOnline,
     this.bio,
-    this.isOnline,
     this.lastSeen,
   });
 }

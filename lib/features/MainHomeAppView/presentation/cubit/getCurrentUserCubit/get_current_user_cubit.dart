@@ -7,45 +7,45 @@ import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.da
 
 import '../../../domain/usecases/get_user_id_use_case.dart';
 import '../../../domain/usecases/get_user_stream_use_case.dart';
-import '../../../domain/usecases/get_user_use_case.dart';
 
 part 'get_current_user_state.dart';
 
 class GetCurrentUserCubit extends Cubit<GetCurrentUserState> {
   GetCurrentUserCubit({
     required this._getUserIDUseCase,
-    required this._getCurrentUserUseCase,
+    // required this._getCurrentUserUseCase,
     required this._getUserStreamUseCase,
   }) : super(GetCurrentUserInitial());
 
   final GetUserIDUseCase _getUserIDUseCase;
-  final GetUserUseCase _getCurrentUserUseCase;
+
+  // final GetUserUseCase _getCurrentUserUseCase;
   final GetUserStreamUseCase _getUserStreamUseCase;
 
   StreamSubscription<Either<String, UserEntity>>? _userSubscription;
 
   late UserEntity userEntity;
 
-  Future<void> getCurrentUser() async {
-    emit(GetCurrentUserLoading());
-
-    final userID = _getUserIDUseCase();
-
-    if (userID == null) {
-      emit(GetCurrentUserInitial());
-      return;
-    }
-
-    final result = await _getCurrentUserUseCase(userID: userID);
-
-    result.fold(
-      ifLeft: (code) => emit(GetCurrentUserFailure(code)),
-      ifRight: (user) {
-        userEntity = user;
-        emit(GetCurrentUserSuccess(user));
-      },
-    );
-  }
+  // Future<void> getCurrentUser() async {
+  //   emit(GetCurrentUserLoading());
+  //
+  //   final userID = _getUserIDUseCase();
+  //
+  //   if (userID == null) {
+  //     emit(GetCurrentUserInitial());
+  //     return;
+  //   }
+  //
+  //   final result = await _getUserStreamUseCase(userID: userID);
+  //
+  //   result.fold(
+  //     ifLeft: (code) => emit(GetCurrentUserFailure(code)),
+  //     ifRight: (user) {
+  //       userEntity = user;
+  //       emit(GetCurrentUserSuccess(user));
+  //     },
+  //   );
+  // }
 
   // Listen to user changes
   void getCurrentUserStream() {

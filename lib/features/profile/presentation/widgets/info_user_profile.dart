@@ -40,12 +40,12 @@ class InfoUserProfile extends StatelessWidget {
                       style: AppTextStyles.displayLarge,
                     ),
                   ),
-                  if (user.isOnline == true)
+                  if (user.isOnline)
                     CircleAvatar(
                       backgroundColor: AppColors.background,
                       radius: 20,
                       child: CircleAvatar(
-                        backgroundColor: user.isOnline == true
+                        backgroundColor: user.isOnline
                             ? AppColors.online
                             : null,
                         radius: 10,

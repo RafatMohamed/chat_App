@@ -18,16 +18,16 @@ class UserRemoteDataSource {
     return user;
   }
 
-  Future<UserModel> getUser(String uid) async {
-    var snapshot = await collection.doc(uid).get();
-    final user = snapshot.data();
-
-    if (!snapshot.exists || user == null) {
-      throw Exception('user-profile-not-found');
-    }
-
-    return user;
-  }
+  // Future<UserModel> getUser(String uid) async {
+  //   var snapshot = await collection.doc(uid).get();
+  //   final user = snapshot.data();
+  //
+  //   if (!snapshot.exists || user == null) {
+  //     throw Exception('user-profile-not-found');
+  //   }
+  //
+  //   return user;
+  // }
 
   Stream<UserModel> getUserStream(String uid) {
     return collection.doc(uid).snapshots().map((event) {

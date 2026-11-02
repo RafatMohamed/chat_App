@@ -42,12 +42,12 @@ class CustomSearchItem extends StatelessWidget {
                       style: AppTextStyles.userName,
                     ),
                   ),
-                  if (user.isOnline != null && user.isOnline == true)
+                  if (user.isOnline)
                     CircleAvatar(
                       backgroundColor: AppColors.background,
                       radius: 10,
                       child: CircleAvatar(
-                        backgroundColor: user.isOnline!
+                        backgroundColor: user.isOnline
                             ? AppColors.online
                             : null,
                         radius: 8,

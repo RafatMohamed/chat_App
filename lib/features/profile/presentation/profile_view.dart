@@ -93,6 +93,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 username: _nameController.text,
                                 email: _emailController.text,
                                 phoneNumber: _phoneController.text,
+                                isOnline: true,
                               );
                               context.read<UpdateUserCubit>().updateUser(
                                 user: user,
