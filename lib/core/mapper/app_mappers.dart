@@ -4,6 +4,8 @@ import 'package:scholar_chat_proj/features/chat/data/model/chat_model.dart';
 import 'package:scholar_chat_proj/features/chat/data/model/message_model.dart';
 import 'package:scholar_chat_proj/features/chat/domain/entities/chat_entities.dart';
 import 'package:scholar_chat_proj/features/chat/domain/entities/message_entities.dart';
+import 'package:scholar_chat_proj/features/groups/data/model/group_model.dart';
+import 'package:scholar_chat_proj/features/groups/domain/entities/group_entities.dart';
 
 class AppMappers {
   static UserEntity toUserEntity(UserModel user) {
@@ -26,6 +28,18 @@ class AppMappers {
       type: chat.type,
       lastMessageAt: chat.lastMessageAt,
       createdAt: chat.createdAt,
+    );
+  }
+
+  static GroupEntity toGroupEntity(GroupModel group) {
+    return GroupEntity(
+      groupId: group.groupId,
+      name: group.name,
+      members: group.members,
+      createdBy: group.createdBy,
+      lastMessage: group.lastMessage,
+      lastMessageAt: group.lastMessageAt,
+      createdAt: group.createdAt,
     );
   }
 

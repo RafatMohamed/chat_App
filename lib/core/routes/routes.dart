@@ -8,4 +8,6 @@ class Routes {
   static const String searchView = '/searchView';
   static const String profileView = '/profileView';
   static const String chatView = '/chatView';
+  static const String createGroupView = '/createGroupView';
+  static const String groupChatView = '/groupChatView';
 }

@@ -6,6 +6,7 @@ import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
 
 import '../../../../core/Di/serves_locator.dart';
 import '../../../chat/presentation/cubit/chatCubit/chat_cubit.dart';
+import '../../../groups/presentation/cubit/groupCubit/group_cubit.dart';
 import '../../../profile/presentation/profile_view.dart';
 import '../../../search/presentation/search_view.dart';
 import '../cubit/getCurrentUserCubit/get_current_user_cubit.dart';
@@ -43,6 +44,9 @@ class _MainAppViewState extends State<MainAppView> {
               getIt<GetCurrentUserCubit>()..getCurrentUserStream(),
         ),
         BlocProvider(create: (context) => getIt<ChatCubit>()..getChatStream()),
+        BlocProvider(
+          create: (context) => getIt<GroupCubit>()..getGroupsStream(),
+        ),
       ],
       child: Scaffold(
         body: Stack(

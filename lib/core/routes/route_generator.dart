@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_chat_proj/core/Di/serves_locator.dart';
 import 'package:scholar_chat_proj/core/routes/routes.dart';
 import 'package:scholar_chat_proj/features/auth/domain/entities/user_entities.dart';
 import 'package:scholar_chat_proj/features/auth/presentation/view/forget_password_view.dart';
@@ -8,7 +10,11 @@ import 'package:scholar_chat_proj/features/home/presentation/home_view.dart';
 import '../../features/MainHomeAppView/presentation/view/main_app_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/MainHomeAppView/presentation/cubit/getUsersCubit/get_users_cubit.dart';
 import '../../features/chat/presentation/views/chat_view.dart';
+import '../../features/groups/domain/entities/group_entities.dart';
+import '../../features/groups/presentation/views/create_group_view.dart';
+import '../../features/groups/presentation/views/group_chat_view.dart';
 import '../../features/profile/presentation/profile_view.dart';
 import '../../features/search/presentation/search_view.dart';
 
@@ -26,6 +32,15 @@ class RouteGenerator {
         Routes.chatView: (context) {
           final user = ModalRoute.of(context)!.settings.arguments as UserEntity;
           return ChatView(userEntity: user);
+        },
+        Routes.createGroupView: (context) => BlocProvider(
+          create: (context) => getIt<GetUsersCubit>()..getUsers(),
+          child: const CreateGroupView(),
+        ),
+        Routes.groupChatView: (context) {
+          final group =
+              ModalRoute.of(context)!.settings.arguments as GroupEntity;
+          return GroupChatView(group: group);
         },
       };
 }

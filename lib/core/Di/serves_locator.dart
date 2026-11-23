@@ -31,6 +31,17 @@ import '../../features/chat/domain/usecases/get_messages_stream_use_case.dart';
 import '../../features/chat/presentation/cubit/chatCubit/chat_cubit.dart';
 import '../../features/chat/presentation/cubit/getMessageCubit/get_message_cubit.dart';
 import '../../features/chat/presentation/cubit/sendMessageCubit/send_message_cubit.dart';
+import '../../features/groups/data/datasources/remot_data_source/group_remote_data_source.dart';
+import '../../features/groups/data/repo/group_repo_impl.dart';
+import '../../features/groups/domain/repo/group_repo.dart';
+import '../../features/groups/domain/usecases/create_group_use_case.dart';
+import '../../features/groups/domain/usecases/get_group_messages_stream_use_case.dart';
+import '../../features/groups/domain/usecases/get_groups_stream_use_case.dart';
+import '../../features/groups/domain/usecases/send_group_message_use_case.dart';
+import '../../features/groups/presentation/cubit/createGroupCubit/create_group_cubit.dart';
+import '../../features/groups/presentation/cubit/getGroupMessagesCubit/get_group_messages_cubit.dart';
+import '../../features/groups/presentation/cubit/groupCubit/group_cubit.dart';
+import '../../features/groups/presentation/cubit/sendGroupMessageCubit/send_group_message_cubit.dart';
 import '../../features/search/presentation/cubit/search_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -47,6 +58,9 @@ void setupLocator() {
   getIt.registerLazySingleton<ChatRemoteDataSource>(
     () => ChatRemoteDataSource(),
   );
+  getIt.registerLazySingleton<GroupRemoteDataSource>(
+    () => GroupRemoteDataSource(),
+  );
 
   getIt.registerLazySingleton<UserPresenceService>(
     () => UserPresenceService(userRemoteDataSource: getIt()),
@@ -60,6 +74,9 @@ void setupLocator() {
   );
   getIt.registerLazySingleton<ChatRepo>(
     () => ChatRepoImpl(chatRemoteDataSource: getIt()),
+  );
+  getIt.registerLazySingleton<GroupRepo>(
+    () => GroupRepoImpl(groupRemoteDataSource: getIt()),
   );
 
   getIt.registerLazySingleton(() => RegisterUseCase(authRepo: getIt()));
@@ -78,6 +95,14 @@ void setupLocator() {
   getIt.registerLazySingleton(() => SendMessageChatUseCase(chatRepo: getIt()));
   getIt.registerLazySingleton(
     () => GetMessagesStreamUseCase(chatRepo: getIt()),
+  );
+  getIt.registerLazySingleton(() => CreateGroupUseCase(groupRepo: getIt()));
+  getIt.registerLazySingleton(() => GetGroupsStreamUseCase(groupRepo: getIt()));
+  getIt.registerLazySingleton(
+    () => SendGroupMessageUseCase(groupRepo: getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => GetGroupMessagesStreamUseCase(groupRepo: getIt()),
   );
 
   getIt.registerFactory(
@@ -122,6 +147,29 @@ void setupLocator() {
   getIt.registerFactory(
     () => GetMessagesCubit(
       getMessagesStreamUseCase: getIt(),
+      getUserIdUseCase: getIt(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => GroupCubit(getGroupsStreamUseCase: getIt(), userIDUseCase: getIt()),
+  );
+
+  getIt.registerFactory(
+    () =>
+        CreateGroupCubit(createGroupUseCase: getIt(), userIDUseCase: getIt()),
+  );
+
+  getIt.registerFactory(
+    () => SendGroupMessageCubit(
+      sendGroupMessageUseCase: getIt(),
+      userIDUseCase: getIt(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => GetGroupMessagesCubit(
+      getGroupMessagesStreamUseCase: getIt(),
       getUserIdUseCase: getIt(),
     ),
   );

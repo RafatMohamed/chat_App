@@ -123,4 +123,18 @@ class AppTexts {
   static const String chat = 'Chats';
   static const String search = 'Search';
   static const String profile = 'Profile';
+
+  // Groups
+  static const String groups = 'Groups';
+  static const String createGroup = 'Create Group';
+  static const String groupName = 'Group Name';
+  static const String enterGroupName = 'Enter group name';
+  static const String selectMembers = 'Select Members';
+  static const String noGroupsYet = 'No groups yet';
+  static const String noGroupsDesc =
+      'Create a group and start chatting together.';
+  static const String groupCreatedSuccess = 'Create Group Success';
+  static const String selectOneMemberAtLeast = 'Select at least one member';
+
+  static String membersCount(int count) => '$count members';
 }

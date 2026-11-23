@@ -11,6 +11,9 @@ import 'core/resources/app_them.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/chat/presentation/cubit/getMessageCubit/get_message_cubit.dart';
 import 'features/chat/presentation/cubit/sendMessageCubit/send_message_cubit.dart';
+import 'features/groups/presentation/cubit/createGroupCubit/create_group_cubit.dart';
+import 'features/groups/presentation/cubit/getGroupMessagesCubit/get_group_messages_cubit.dart';
+import 'features/groups/presentation/cubit/sendGroupMessageCubit/send_group_message_cubit.dart';
 import 'features/search/presentation/cubit/search_cubit.dart';
 import 'firebase_options.dart';
 
@@ -35,6 +38,9 @@ class ChatApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<SearchCubit>()),
         BlocProvider(create: (context) => getIt<GetMessagesCubit>()),
         BlocProvider(create: (context) => getIt<SendMessageCubit>()),
+        BlocProvider(create: (context) => getIt<CreateGroupCubit>()),
+        BlocProvider(create: (context) => getIt<GetGroupMessagesCubit>()),
+        BlocProvider(create: (context) => getIt<SendGroupMessageCubit>()),
       ],
       child: const CustomMaterialApp(),
     );
