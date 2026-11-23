@@ -164,6 +164,7 @@ void setupLocator() {
     () => SendGroupMessageCubit(
       sendGroupMessageUseCase: getIt(),
       userIDUseCase: getIt(),
+      getUserStreamUseCase: getIt(),
     ),
   );
 

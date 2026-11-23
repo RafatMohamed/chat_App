@@ -40,6 +40,18 @@ class CustomMessageBubble extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  if (!isMe && message.senderName != null) ...[
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        message.senderName!,
+                        style: AppTextStyles.messageTime.copyWith(
+                          color: AppColors.accent,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                  ],
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(message.text, style: AppTextStyles.message),

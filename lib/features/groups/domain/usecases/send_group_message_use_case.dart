@@ -8,11 +8,13 @@ class SendGroupMessageUseCase {
   Future<void> call({
     required String groupId,
     required String sendId,
+    required String senderName,
     required String message,
   }) {
     return _groupRepo.sendGroupMessage(
       groupId: groupId,
       sendId: sendId,
+      senderName: senderName,
       message: message,
     );
   }

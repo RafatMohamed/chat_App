@@ -13,6 +13,7 @@ abstract class GroupRepo {
   Future<void> sendGroupMessage({
     required String groupId,
     required String sendId,
+    required String senderName,
     required String message,
   });
 

@@ -35,11 +35,13 @@ class GroupRepoImpl implements GroupRepo {
   Future<void> sendGroupMessage({
     required String groupId,
     required String sendId,
+    required String senderName,
     required String message,
   }) {
     return _groupRemoteDataSource.sendGroupMessage(
       groupId: groupId,
       sendId: sendId,
+      senderName: senderName,
       message: message,
     );
   }

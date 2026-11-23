@@ -47,6 +47,7 @@ class AppMappers {
     return MessageEntity(
       messageId: message.messageId,
       senderId: message.senderId,
+      senderName: message.senderName,
       text: message.text,
       createdAt: message.createdAt,
     );

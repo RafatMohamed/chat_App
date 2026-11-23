@@ -53,6 +53,7 @@ class GroupRemoteDataSource {
   Future<void> sendGroupMessage({
     required String groupId,
     required String sendId,
+    required String senderName,
     required String message,
   }) async {
     final messageId = const Uuid().v4();
@@ -60,6 +61,7 @@ class GroupRemoteDataSource {
     final messageModel = MessageModel(
       messageId: messageId,
       senderId: sendId,
+      senderName: senderName.isEmpty ? null : senderName,
       text: message,
       createdAt: DateTime.now(),
     );
